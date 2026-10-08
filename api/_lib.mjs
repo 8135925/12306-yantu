@@ -265,6 +265,12 @@ async function queryAnySeat({ stationStart, stationEnd, date, filterTrainName, t
     // 与查询区间完全等价的方案（两端都无多买/少买；兼容 上海/上海虹桥、民权/民权北 等模糊站名）
     const isDirect = buyMore === 0 && lessBuy === 0
 
+    // 展示分组：
+    //   0 = 上车点=出发站（目的站遍历到终点）
+    //   1 = 上车点在出发站之前，且下车点=终点（各上车点的「直达终点」行）
+    //   2 = 其余组合（提前上车 + 中途下车）
+    const group = startIdx === middleIdx ? 0 : transferIdx === stopNames.length - 1 ? 1 : 2
+
     return {
       originTrain: trainItem.TrainName, // 上车站车次
       startStation: t.startStation, // 起点站（实际上车点）
@@ -283,10 +289,16 @@ async function queryAnySeat({ stationStart, stationEnd, date, filterTrainName, t
       seats: t.seats, // 全部席别余票
       seatPrices: t.seatPrices, // 全部席别票价
       url: `https://www.suanya.com/pages/trainList?fromCn=${encodeURIComponent(t.startStation)}&toCn=${encodeURIComponent(t.endStation)}&fromDate=${date}#:~:text=${t.train}`,
+      _group: group, // 内部排序用，返回前剔除
     }
   })
 
-  // 10. 保持查询顺序返回（出发站开始，下车点逐站往后；不再按差价排序）
+  // 10. 分组排序（稳定排序，组内保持查询顺序）：
+  //     ① 上车点=出发站，目的站遍历到终点
+  //     ② 各前一站的「直达终点」行：兰考→上海、开封→上海、…、银川→上海
+  //     ③ 其余「提前上车 + 中途下车」组合
+  rows.sort((a, b) => a._group - b._group)
+  for (const r of rows) delete r._group
   return { type: 'rows', data: rows, stops: stopNames, directPrices }
 }
 
