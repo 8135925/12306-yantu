@@ -1,0 +1,11 @@
+{
+  "name": "yantu",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "cd frontend && npm install && npm run build",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:server": "node server/index.mjs",
+    "start": "node server/index.mjs"
+  }
+}

@@ -1,0 +1,632 @@
+:root {
+  --bg: #f0f2f3;
+  --panel: #ffffff;
+  --border: #e0e2e6;
+  --text: #1a1a1a;
+  --muted: #8a8f99;
+  --accent: #00b578;
+  --accent-dark: #009a66;
+  --accent-soft: #e8f8f2;
+  --red: #d54941;
+  --link: #245bdb;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+}
+
+/* 顶部绿色条（参考图样式） */
+.topbar {
+  height: 4px;
+  background: var(--accent);
+}
+
+.page {
+  max-width: none;
+  margin: 0 auto;
+  padding: 16px 16px 48px;
+}
+
+.card {
+  background: var(--panel);
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* ---------- 表单：单行查询栏 ---------- */
+.query-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.query-item {
+  flex: 0 0 auto;
+}
+
+.query-item.grow {
+  flex: 0 0 auto;
+  width: 150px;
+}
+
+.query-item .field {
+  margin-bottom: 0;
+}
+
+.query-row .query-btn {
+  padding: 9px 30px;
+}
+
+/* 日期左右快捷按钮 */
+.date-group {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.date-group input {
+  flex: 1 1 auto;
+  width: auto;
+  min-width: 0;
+}
+
+.day-btn {
+  padding: 8px 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--panel);
+  color: var(--muted);
+  font-size: 11px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.day-btn:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.field-label {
+  display: block;
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.field input,
+.field select {
+  width: 100%;
+  padding: 9px 12px;
+  font-size: 14px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  outline: none;
+  background: var(--panel);
+  color: var(--text);
+  transition: border-color 0.15s;
+}
+
+.field input:focus,
+.field select:focus {
+  border-color: var(--accent);
+}
+
+.field input::placeholder {
+  color: #b8bcc4;
+}
+
+.field input:disabled {
+  background: #f5f6f7;
+  cursor: not-allowed;
+}
+
+/* ---------- 站点联想 ---------- */
+.combo {
+  position: relative;
+}
+
+.suggestions {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 20;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.group-title {
+  padding: 7px 12px 3px;
+  font-size: 12px;
+  color: var(--muted);
+  background: #f7f8fa;
+  position: sticky;
+  top: 0;
+}
+
+.item {
+  padding: 8px 12px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item:hover,
+.item.active {
+  background: var(--accent-soft);
+}
+
+.item .n {
+  font-size: 14px;
+}
+
+.item .c {
+  font-size: 12px;
+  color: var(--muted);
+  font-family: ui-monospace, monospace;
+}
+
+/* ---------- 互换按钮 ---------- */
+.swap-btn {
+  padding: 9px 12px;
+  margin-bottom: 0;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--panel);
+  color: var(--muted);
+  font-size: 14px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.swap-btn:hover:not(:disabled) {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* ---------- 操作按钮 ---------- */
+.btn {
+  padding: 8px 18px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--panel);
+  color: var(--text);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.btn.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.btn.primary:hover:not(:disabled) {
+  background: var(--accent-dark);
+  color: #fff;
+}
+
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* ---------- 提示 ---------- */
+.msg {
+  font-size: 13px;
+  margin-top: 6px;
+}
+
+.msg.error {
+  color: var(--red);
+}
+
+.msg.muted {
+  color: var(--muted);
+}
+
+.msg.sale {
+  color: #b26a00;
+  background: #fff8ec;
+  border: 1px solid #ffe7ba;
+  border-radius: 6px;
+  padding: 7px 12px;
+  margin-top: 10px;
+}
+
+/* ---------- 查询结果 ---------- */
+.query-meta {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.mock-tag {
+  font-size: 12px;
+  color: #b26a00;
+  background: #fff3e0;
+  border: 1px solid #ffd591;
+  border-radius: 4px;
+  padding: 1px 8px;
+}
+
+/* 车次列表「只看有票」开关 */
+.toggle-item {
+  display: inline-flex;
+  gap: 5px;
+  align-items: center;
+  font-size: 13px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.toggle-item input {
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+/* 返回车次列表按钮 */
+.back-btn {
+  padding: 4px 14px;
+  font-size: 12px;
+  border-radius: 4px;
+}
+
+/* 注意：不能给 .table-wrap 设 overflow-x:auto，否则表格成为独立滚动容器，
+   sticky 表头会相对容器而非页面定位（表现为表头卡在数据行中间）。
+   宽表格由页面级横向滚动承担。 */
+.table-wrap {
+  overflow: visible;
+}
+
+.result-table {
+  width: 100%;
+  /* separate 模式 + 单边框：collapse 与大量 sticky 单元格组合会导致整表重绘，点击/滚动明显卡顿 */
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.result-table th,
+.result-table td {
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 8px 10px;
+  text-align: left;
+}
+
+.result-table thead th {
+  border-top: 1px solid var(--border);
+}
+
+.result-table th:first-child,
+.result-table td:first-child {
+  border-left: 1px solid var(--border);
+}
+
+.result-table th {
+  background: #f7f8fa;
+  font-weight: 500;
+  color: var(--text);
+  position: sticky;
+  /* 吸附在线路图下方（高度由 ResultTable 动态测量写入 --linemap-h） */
+  top: var(--linemap-h, 0px);
+  z-index: 25;
+}
+
+/* 可排序席别表头 */
+.th-sort {
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.th-sort:hover {
+  color: var(--accent-dark);
+  background: #eef1f4;
+}
+
+.sort-arrow {
+  margin-left: 2px;
+  color: var(--accent-dark);
+  font-size: 10px;
+}
+
+.result-table tbody tr:hover {
+  background: #fafbfc;
+}
+
+.result-table tbody tr.selected {
+  background: #e8f1fb;
+}
+
+/* 与查询区间完全一致的行：浅绿底 + 左侧绿色粗边 */
+.result-table tbody tr.exact td {
+  background: #e6f9f0;
+}
+
+.result-table tbody tr.exact td:first-child {
+  border-left: 3px solid var(--accent);
+}
+
+/* 「直达」小标签 */
+.direct-tag {
+  display: inline-block;
+  margin-left: 5px;
+  font-size: 10px;
+  font-weight: 600;
+  color: #00875a;
+  background: #c9f2e0;
+  border-radius: 3px;
+  padding: 0 5px;
+  vertical-align: middle;
+}
+
+/* ---------- 地铁线式经停图 ---------- */
+.line-map-wrap {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  margin-bottom: 16px;
+  padding: 22px 10px 6px;
+  background: #fafbfc;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.line-map {
+  position: relative;
+  display: flex;
+}
+
+/* 底层灰线 */
+.line-bar {
+  position: absolute;
+  top: 5px;
+  height: 4px;
+  background: #d9dce1;
+  border-radius: 2px;
+}
+
+/* 选中区间高亮线（绿色）：用 transform 合成器动画代替 left/width 布局动画 */
+.line-bar-active {
+  position: absolute;
+  left: 0;
+  top: 5px;
+  height: 4px;
+  background: var(--accent);
+  border-radius: 2px;
+  z-index: 1;
+  transition: transform 0.2s ease-out;
+  will-change: transform;
+}
+
+.line-stop {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: visible;
+}
+
+.line-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid #b0b6bf;
+  box-sizing: border-box;
+  transition: all 0.2s;
+}
+
+.line-stop.in-range .line-dot {
+  border-color: var(--accent);
+  background: #b9ecd7;
+}
+
+.line-stop.endpoint .line-dot {
+  width: 16px;
+  height: 16px;
+  margin-top: -2px;
+  background: var(--accent);
+  border-color: var(--accent-dark);
+}
+
+.line-name {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #555;
+  white-space: nowrap;
+}
+
+.line-stop.in-range .line-name {
+  color: var(--accent-dark);
+  font-weight: 600;
+}
+
+.line-stop.endpoint .line-name {
+  color: var(--accent-dark);
+  font-weight: 700;
+}
+
+.line-legend {
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.line-legend b {
+  color: var(--accent-dark);
+}
+
+.result-table td.red {
+  color: var(--red);
+  font-weight: 600;
+}
+
+.result-table td.green {
+  color: #2ba245;
+  font-weight: 600;
+}
+
+.result-table a {
+  color: var(--link);
+  text-decoration: none;
+}
+
+/* 起点站/目的站时刻与跨天标识 */
+.stop-time {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.day-badge {
+  color: #e6722e;
+  font-weight: 600;
+  font-size: 10px;
+  margin-left: 1px;
+}
+
+/* 票价列：右侧相比直达的差价 */
+.seat-diff {
+  margin-left: 4px;
+  font-size: 11px;
+}
+
+.seat-diff.diff-up {
+  color: var(--red);
+}
+
+.seat-diff.diff-down {
+  color: #2ba245;
+}
+
+.result-table a:hover {
+  text-decoration: underline;
+}
+
+.empty {
+  text-align: center;
+  color: var(--muted);
+  padding: 32px 0;
+}
+
+/* ---------- 12306 风格车次余票列表 ---------- */
+.train-table {
+  font-size: 12px;
+}
+
+.train-table th,
+.train-table td {
+  text-align: center;
+  padding: 7px 8px;
+}
+
+.train-table th {
+  background: #f5f6f8;
+  color: #666;
+  font-weight: 500;
+}
+
+.train-table .train-row {
+  cursor: pointer;
+}
+
+.train-table .train-row:hover {
+  background: #e8f1fb;
+}
+
+.train-table .train-code {
+  color: #3b74d6;
+  font-weight: 600;
+}
+
+.train-table .train-time {
+  color: var(--muted);
+  margin-left: 4px;
+  font-size: 11px;
+}
+
+/* 席别余票取色（对齐 12306） */
+.seat-num {
+  color: #3b74d6;
+  font-weight: 600;
+}
+
+.seat-many {
+  color: #2ba245;
+  font-weight: 600;
+}
+
+.seat-hb {
+  color: #ff8c00;
+  font-weight: 600;
+}
+
+.seat-none {
+  color: #b0b3b8;
+}
+
+.seat-pre {
+  color: #7a5fc9;
+  font-weight: 600;
+}
+
+.seat-na {
+  color: #c9ccd1;
+}
+
+.footer {
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+@media (max-width: 900px) {
+  .query-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .query-item,
+  .query-item.grow {
+    width: 100%;
+  }
+
+  .query-row .query-btn {
+    width: 100%;
+  }
+}

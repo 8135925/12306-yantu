@@ -1,0 +1,6 @@
+{
+  "rateLimit": {
+    "enabled": false,
+    "perMinute": 10
+  }
+}

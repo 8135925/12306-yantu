@@ -1,0 +1,39 @@
+# ---- Node / 前端构建 ----
+node_modules/
+dist/
+*.local
+npm-debug.log*
+yarn-error.log*
+
+# ---- Python（脚本 / Serverless API）----
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# ---- 环境变量 / 密钥 ----
+.env
+.env.*
+!.env.example
+
+# ---- 日志与临时文件 ----
+logs/
+*.log
+tmp/
+.cache/
+
+# ---- 参考资料目录（非交付物，不入库）----
+# cankao/  原型参考（stations.json 已复制至 frontend/public）
+# cankao2/ 12306spy 第三方项目完整副本（2 万+ 文件）
+cankao/
+cankao2/
+
+# ---- 编辑器 / IDE / 部署工具 ----
+.vscode/
+.idea/
+.vercel/
+
+# ---- 操作系统 ----
+.DS_Store
+Thumbs.db
+Desktop.ini
